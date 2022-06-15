@@ -1,10 +1,10 @@
 resource "aws_instance" "app_server" {
-  ami           = "ami-0c4f7023847b90238"
-  instance_type = "t2.micro"
-  security_groups = [aws_security_group.public.id]
+  ami                    = var.type_ami
+  instance_type          = var.instance_type
+  security_groups        = [aws_security_group.public.id]
   vpc_security_group_ids = [aws_security_group.public.id]
-  subnet_id = aws_subnet.public.id
-  key_name = "jlucas"
+  subnet_id              = aws_subnet.public.id
+  key_name               = var.key_pair
   associate_public_ip_address = true
   connection {
     type =        "ssh"
