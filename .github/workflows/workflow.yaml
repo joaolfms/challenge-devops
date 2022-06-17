@@ -1,0 +1,14 @@
+name: CI
+on:
+  push:
+  workflow_dispatch:
+
+env: 
+
+jobs:
+  - name: terraform
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "terraform init"
+        uses: actions/checkout@v2
