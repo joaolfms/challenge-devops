@@ -24,7 +24,6 @@ iowait=`cat ./cpu.txt | awk ' {print $4}'`
 steal=`cat ./cpu.txt | awk ' {print $5}'`
 idle=`cat ./cpu.txt | awk ' {print $6}'`
 
-jo -p MemTotal=$memtotal status=$(jo MemFree=$memfree MemAvailable=$memavailable \
-MemCache=$cache) Disk=$disksize info=$(jo DiskFree=$diskfree \
- kB_read/s=$readseg kB_wrtn/s=$writeseg kB_read=$read KB_wrtn=$write ) Avg-Cpu=$(jo User=$user \
- Nice=$nice System=$system IoWait=$iowait Steal=$steal Idle=$idle) > index.html
+jo -p MemTotal=$memtotal status=$(jo MemFree=$memfree MemAvailable=$memavailable MemCache=$cache) \
+Disk=$disksize info=$(jo DiskFree=$diskfree kB_read/s=$readseg kB_wrtn/s=$writeseg kB_read=$read KB_wrtn=$write ) \
+Avg-Cpu=$(jo User=$user  Nice=$nice System=$system IoWait=$iowait Steal=$steal Idle=$idle) > info.txt

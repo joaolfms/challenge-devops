@@ -1,0 +1,9 @@
+Linux 5.4.0-91-generic (jlucasfms) 	06/17/2022 	_x86_64_	(4 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           8,8%    0,0%    3,1%   42,1%    0,0%   46,0%
+
+      tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd Device
+    30,46       135,6k       354,1k         0,0k       2,3G       6,0G       0,0k sda
+
+
