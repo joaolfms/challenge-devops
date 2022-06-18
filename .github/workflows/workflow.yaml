@@ -16,13 +16,14 @@ jobs:
       - name: Configurando as credenciais da AWS
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${AWS_ACCESS_KEY_ID}
-          aws-secret-access-key: ${AWS_SECRET_ACCESS_KEY}
-          aws-region: ${{ secrets.AWS_REGION }}
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: us-east-1
+          
       
       - name: Login no Docker Hub
         uses: actions-hub/docker/login@master
-        env:
+        env:         
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
 
