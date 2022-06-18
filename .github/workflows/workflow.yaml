@@ -41,11 +41,7 @@ jobs:
 
       - name: Update Deployment Image
         run: |-
-          sudo add-apt-repository ppa:rmescandon/yq
-          sudo apt-get update
-          sudo apt-get install -y yq
-          export IMAGE_NAME=push joaolfms/monitor_sys:${{ github.sha }}
-          yq e -i '.spec.template.spec.containers[0].image = env(IMAGE_NAME)' infra/userdata.tpl
+          export IMAGE_NAME=joaolfms/monitor_sys:${{ github.sha }}
 
       - name: Terraform apply
         run: |
