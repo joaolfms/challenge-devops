@@ -42,6 +42,7 @@ jobs:
 
       - name: Terraform apply
         run: |
+          cd infra
           terraform init
           terraform plan
           terraform apply -auto-approve
