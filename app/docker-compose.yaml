@@ -4,5 +4,26 @@ services:
     image: 'nginx'
     ports:
       - '80:80' 
+      - '443:443'
     volumes:
-      - $PWD:/usr/share/nginx/html
+      - $PWD/html:/usr/share/nginx/html:ro
+      - ./nginx:/etc/nginx
+      - ./cert:/cert
+
+  nginx1:
+    image: 'nginx'
+    ports:
+      - '81:80' 
+    volumes:
+      - $PWD/html1:/usr/share/nginx/html:ro
+      - ./nginx:/etc/nginx
+      - ./cert:/cert
+
+  nginx2:
+    image: 'nginx'
+    ports:
+      - '82:80' 
+    volumes:
+      - $PWD/html2:/usr/share/nginx/html:ro
+      - ./nginx:/etc/nginx
+      - ./cert:/cert
