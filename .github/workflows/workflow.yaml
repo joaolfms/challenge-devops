@@ -38,20 +38,7 @@ jobs:
           args: push joaolfms/monitor_sys:${IMAGE_TAG}
 
       - uses: terraform/init@v1
-        run: |-
-          echo "Iniciando a criação do ambiente"
-          terraform init
 
       - uses: terraform/apply@master
 
-      - name: Terraform Apply
-        run: |-
-          cd infra
-          terraform apply -auto-approve
-
       - uses: terraform/destroy@master
-
-      - name: Terraform Destroy
-        run: |-
-          cd infra
-          terraform destroy -auto-approve
