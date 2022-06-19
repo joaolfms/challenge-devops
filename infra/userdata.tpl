@@ -9,5 +9,5 @@ systemctl restart docker
 apt install docker-compose -y
 apt install jo -y
 apt install sysstat -y
-docker run -d -v ./:/urs/share/nginx/html -p joaolfms/monitor_sys:6be061433738ff570c00333d28d4b13ed3fb3a4a
+docker run -d -v ./:/urs/share/nginx/html -p 80:80 joaolfms/monitor_sys:6be061433738ff570c00333d28d4b13ed3fb3a4a
 docker-compose up -d
