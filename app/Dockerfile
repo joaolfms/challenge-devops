@@ -8,4 +8,4 @@ COPY . ./app
 
 WORKDIR /app
 
-CMD [ "cd app", "docker-compose up -d", "python3", "app.py"]
+CMD ["python3", "app.py"]
