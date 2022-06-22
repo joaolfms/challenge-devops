@@ -11,12 +11,18 @@
          <div class="row">
                <div class="col-md-12">
                   <h1>Monitoramento do Servidor:</h1>
+               <div id="current_date"></p>
+                  <script>
+                  document.getElementById("current_date").innerHTML = Date();
+                  </script>
          <div class="row">
                <div class="col-md-12">
                   <div class="alert alert-success" role="alert">
                      <p>
-                     <strong>Monitoramento de servidor em excução.</strong>
-<iframe src="info.txt" frameborder="0" scrolling="no" height="400" width="850"></iframe>
+                        <iframe src="info.json" frameborder="0" scrolling="no" height="400" width="850"></iframe>
+                     </p>
+                     <p>
+                        <strong>Monitoramento de servidor em excução.</strong>
                      <p>
    </body>
 </html>

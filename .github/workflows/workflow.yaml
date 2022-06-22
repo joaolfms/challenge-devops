@@ -27,21 +27,17 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
 
       - name: Buildando a imagem
-        run: docker build -t joaolfms/monitor_sys:${{ github.sha }} --file app/Dockerfile .
+        run: docker build -t joaolfms/monitor_sys:latest --file app/Dockerfile .
 
       - name: Push para o Docker Hub
         uses: actions-hub/docker@master
         with:
-          args: push joaolfms/monitor_sys:${{ github.sha }}
+          args: push joaolfms/monitor_sys:latest
 
       - name: Install Terraform
         uses: little-core-labs/install-terraform@v2.0.0
         with:
             version: 3.74.1
-
-      - name: Update Deployment Image
-        run: |-
-          export IMAGE_NAME=joaolfms/monitor_sys:${{ github.sha }}
 
       - name: Terraform apply
         run: |
@@ -50,7 +46,7 @@ jobs:
           terraform plan
           terraform apply -auto-approve
 
-      - name: Terraform apply
-        run: |-
-          cd infra
-          terraform destroy -auto-approve
+      #- name: Terraform apply
+      #  run: |-
+      #    cd infra
+      #    terraform destroy -auto-approve

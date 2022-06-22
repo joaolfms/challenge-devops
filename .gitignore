@@ -1,4 +1,4 @@
-.terraform
+*.terraform
 teste
 terraform.tfstate
 .terraform.lock.hcl
