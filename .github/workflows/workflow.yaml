@@ -23,7 +23,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
 
       - name: Buildando a imagem
-        run: docker build -t joaolfms/monitor_sys:${{ github.sha }} --file .
+        run: docker build -t joaolfms/monitor_sys:${{ github.sha }} .
 
       - name: Push para o Docker Hub
         uses: actions-hub/docker@master
@@ -49,7 +49,7 @@ jobs:
           terraform init
           terraform apply -auto-approve
 
-      #- name: Terraform apply
-      #  run: |-
-      #    cd infra
-      #    terraform destroy -auto-approve
+      - name: Terraform apply
+        run: |-
+          cd infra
+          terraform destroy -auto-approve
