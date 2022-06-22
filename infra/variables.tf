@@ -25,5 +25,11 @@ variable "repo" {
 
 variable "script" {
   description = "Script to be executed on the instance"
-  default     = "sudo apt-get update && sudo curl -fsSL https://get.docker.com | sh && sudo usermod -aG docker $USER && sudo systemctl enable docker && sudo systemctl restart docker"
+  default     = <<EOF
+  "sudo apt-get update",
+  "sudo curl -fsSL https://get.docker.com | sh",
+  "sudo usermod -aG docker $USER",
+  "sudo systemctl enable docker",
+  "sudo systemctl restart docker"
+EOF
 }

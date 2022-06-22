@@ -9,4 +9,5 @@ systemctl restart docker
 apt install docker-compose -y
 apt install jo -y
 apt install sysstat -y
-docker-compose up -d
+docker run -d -v $PWD:/app joaolfms/monitor_sys:latest
+docker run -d -v $PWD:/app nginx
