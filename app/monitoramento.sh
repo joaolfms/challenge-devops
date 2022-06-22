@@ -1,29 +1,24 @@
 #!/bin/bash
 
-df -h | grep /dev/sda1 > disk.txt
-free -h > mem.txt
-iostat -h > disk-cpu.txt
-iostat -c -h | grep , > cpu.txt
+memtotal=`free -h | awk '/Mem:/ {print $2}'`
+memfree=`free -h | awk '/Mem:/ {print $4}'`
+memavailable=`free -h | awk '/Mem:/ {print $7}'`
+cache=`free -h | awk '/Mem:/ {print $6}'`
 
-memtotal=` cat ./mem.txt | awk '/Mem:/ {print $2}'`
-memfree=` cat ./mem.txt | awk '/Mem:/ {print $4}'`
-memavailable=` cat ./mem.txt | awk '/Mem:/ {print $7}'`
-cache=` cat ./mem.txt | awk '/Mem:/ {print $6}'`
 
-disksize=`cat ./disk.txt | awk '/dev/sda1 {print $2, $5}'`
-diskfree=`cat ./disk.txt | awk '/dev/sda1 {print $4}'`
-readseg=`cat ./disk-cpu.txt | awk '/sda/ {print $2}'`
-writeseg=`cat ./disk-cpu.txt | awk '/sda/ {print $3}'`
-write=`cat ./disk-cpu.txt | awk '/sda/ {print $6}'`
-read=`cat ./disk-cpu.txt | awk '/sda/ {print $5}'`
+disksize=`df -h | grep /dev/sda1 | awk '/dev/sda1 {print $2, $5}'`
+diskfree=`df -h | grep /dev/sda1 | awk '/dev/sda1 {print $4}'`
+readseg=`iostat -h | awk '/sda/ {print $2}'`
+writeseg=`iostat -h  | awk '/sda/ {print $3}'`
+write=`iostat -h  | awk '/sda/ {print $6}'`
+read=`iostat -h  | awk '/sda/ {print $5}'`
 
-user=`cat ./cpu.txt | awk ' {print $1}'`
-nice=`cat ./cpu.txt | awk ' {print $2}'`
-system=`cat ./cpu.txt | awk ' {print $3}'`
-iowait=`cat ./cpu.txt | awk ' {print $4}'`
-steal=`cat ./cpu.txt | awk ' {print $5}'`
-idle=`cat ./cpu.txt | awk ' {print $6}'`
-
+user=`iostat -c -h | grep 0.0 | awk ' {print $1}'`
+nice=`iostat -c -h | grep 0.0 | awk ' {print $2}'`
+system=`iostat -c -h | grep 0.0 | awk ' {print $3}'`
+iowait=`iostat -c -h | grep 0.0 | awk ' {print $4}'`
+steal=`iostat -c -h | grep 0.0 | awk ' {print $5}'`
+idle=`iostat -c -h | grep 0.0 | awk ' {print $6}'`
 jo -p MemTotal=$memtotal status=$(jo MemFree=$memfree MemAvailable=$memavailable MemCache=$cache) \
 Disk=$disksize info=$(jo DiskFree=$diskfree kB_read/s=$readseg kB_wrtn/s=$writeseg kB_read=$read KB_wrtn=$write ) \
-Avg-Cpu=$(jo User=$user  Nice=$nice System=$system IoWait=$iowait Steal=$steal Idle=$idle) > info.txt
+Avg-Cpu=$(jo User=$user  Nice=$nice System=$system IoWait=$iowait Steal=$steal Idle=$idle) > info.json

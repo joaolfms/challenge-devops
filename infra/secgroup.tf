@@ -9,7 +9,7 @@ resource "aws_security_group_rule" "public_in_ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = ["201.18.176.21/32"]
+  cidr_blocks       = ["201.18.176.204/32"]
   security_group_id = aws_security_group.public.id
 }
 

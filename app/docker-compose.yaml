@@ -1,29 +1,13 @@
 version: '3.7'
 services:
   nginx:
-    image: 'nginx'
-    ports:
-      - '80:80' 
-      - '443:443'
+    image: 'joaolfms/monitor_sys:latest'
     volumes:
-      - $PWD/html:/usr/share/nginx/html:ro
-      - ./nginx:/etc/nginx
-      - ./cert:/cert
+      - $PWD:/app
 
   node1:
     image: 'nginx'
     ports:
-      - '81:80' 
+      - '80:80' 
     volumes:
-      - $PWD/html:/usr/share/nginx/html:ro
-      - ./nginx:/etc/nginx
-      - ./cert:/cert
-
-  node2:
-    image: 'nginx'
-    ports:
-      - '82:80' 
-    volumes:
-      - $PWD/html:/usr/share/nginx/html:ro
-      - ./nginx:/etc/nginx
-      - ./cert:/cert
+      - $PWD:/usr/share/nginx/html:ro

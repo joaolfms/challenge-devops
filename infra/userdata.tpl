@@ -6,8 +6,6 @@ curl -fsSL https://get.docker.com | sh
 usermod -aG docker $USER
 systemctl enable docker
 systemctl restart docker
-apt install docker-compose -y
-apt install jo -y
-apt install sysstat -y
-docker run -d -v $PWD:/app joaolfms/monitor_sys:latest
-docker run -d -v $PWD:/app nginx
+sudo apt install docker-compose -y
+run -d -v $PWD:/app joaolfms/monitor_sys:latest
+docker run -d -p 80:80 -v $PWD:/usr/share/nginx/html nginx
