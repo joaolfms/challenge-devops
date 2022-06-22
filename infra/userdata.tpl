@@ -7,6 +7,7 @@ usermod -aG docker $USER
 systemctl enable docker
 systemctl restart docker
 sudo apt install docker-compose -y
+touch /home/ubuntu/docker-compose.ymls
 docker-compose.yaml << EOF
 version: '3.7'
 services:
