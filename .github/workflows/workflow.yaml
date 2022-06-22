@@ -23,7 +23,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
 
       - name: Buildando a imagem
-        run: docker build -t joaolfms/monitor_sys:${{ github.sha }} --file app/Dockerfile .
+        run: docker build -t joaolfms/monitor_sys:${{ github.sha }} /app
 
       - name: Push para o Docker Hub
         uses: actions-hub/docker@master
