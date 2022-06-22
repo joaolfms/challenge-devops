@@ -3,14 +3,12 @@ on:
   push:
   workflow_dispatch:
 jobs:
-  credentials:
+  depkoyment:
+    env:
+      IMAGE_TAG: ${{ github.sha }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: teste
-        run: |
-          echo ${{ github.sha }}
 
       - name: Configurando as credenciais da AWS
         uses: aws-actions/configure-aws-credentials@v1
@@ -27,12 +25,21 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
 
       - name: Buildando a imagem
-        run: docker build -t joaolfms/monitor_sys:latest --file app/Dockerfile .
+        run: docker build -t joaolfms/monitor_sys:${IMAGE_TAG} --file app/Dockerfile .
 
       - name: Push para o Docker Hub
         uses: actions-hub/docker@master
         with:
-          args: push joaolfms/monitor_sys:latest
+          args: push joaolfms/monitor_sys:${IMAGE_TAG}
+
+      - name: Update Deployment Image
+        run: |-
+          sudo add-apt-repository ppa:rmescandon/yq
+          sudo apt-get update
+          sudo apt-get install -y yq
+          echo $IMAGE_TAG
+          export IMAGE_NAME=joaolfms/monitor_sys:${IMAGE_TAG}
+          yq e -i '.spec.template.spec.containers[0].image = env(IMAGE_NAME)' infra/userdata.tpl
 
       - name: Install Terraform
         uses: little-core-labs/install-terraform@v2.0.0
