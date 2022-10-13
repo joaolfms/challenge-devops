@@ -13,3 +13,4 @@ resource "aws_subnet" "public" {
     Name = "challenger_public_subnet"
   }
 }
+
