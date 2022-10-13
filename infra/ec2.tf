@@ -16,7 +16,7 @@ resource "aws_instance" "app_server" {
   security_groups        = [aws_security_group.public.id]
   vpc_security_group_ids = [aws_security_group.public.id]
   subnet_id              = aws_subnet.public.id
-  key_name               = "jlucasfms"
+  key_name               = "labs-aws"
   associate_public_ip_address = true
   user_data = file("userdata.tpl")
   tags = {
