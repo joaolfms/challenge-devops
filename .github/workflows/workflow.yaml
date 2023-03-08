@@ -45,15 +45,15 @@ jobs:
         with:
             version: 3.74.1
 
-      - name: Terraform apply
-        run: |
-          cd infra
-          terraform init
-          terraform apply -auto-approve
-
 #       - name: Terraform apply
-#         run: |-
+#         run: |
 #           cd infra
-#           terraform destroy -auto-approve
+#           terraform init
+#           terraform apply -auto-approve
+
+      - name: Terraform apply
+        run: |-
+          cd infra
+          terraform destroy -auto-approve
           
           
