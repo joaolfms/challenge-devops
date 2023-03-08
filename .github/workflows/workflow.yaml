@@ -49,11 +49,11 @@ jobs:
         run: |
           cd infra
           terraform init
-#          terraform apply -auto-approve
+          terraform apply -auto-approve
 
-      - name: Terraform apply
-        run: |-
-          cd infra
-          terraform destroy -auto-approve
+#       - name: Terraform apply
+#         run: |-
+#           cd infra
+#           terraform destroy -auto-approve
           
           
